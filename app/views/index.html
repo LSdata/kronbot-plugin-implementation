@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Node mashup</title>
+    
+    <link rel="stylesheet" type="text/css" href="/../public/stylesheet/styling.css">
+</head>
+
+<body>
+    <h3>Search for restaurants on Google Places:</h3>
+    Ex, 'England London McDonalds'
+    <br><br>
+   
+    Search keywords: <input id ="inputSearch" type="text" name="search">
+    
+    <button onclick="searchGplaces()">Click me</button>
+
+    <div id="divTable"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/../public/js/googleSearch.js"></script>
+</body>
+
+</html>

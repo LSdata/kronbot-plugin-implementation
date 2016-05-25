@@ -1,0 +1,20 @@
+{
+  "name": "nodeservices4me307",
+  "version": "0.0.1",
+  "description": "A mashup website of two Web Services called from node server side",
+  "main": "app.js",
+  "repository": "",
+  "author": "Linnea Strågefors <ls223aa@student.lnu.se>",
+  "scripts": {
+    "start": "node app.js"
+   },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "google-places": "0.0.2",
+    "google-places-js": "^0.1.1",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
