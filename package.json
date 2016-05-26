@@ -4,7 +4,7 @@
   "description": "A mashup website of two Web Services called from node server side",
   "main": "app.js",
   "repository": "",
-  "author": "Linnea Strågefors <ls223aa@student.lnu.se>",
+  "author": "Linnea Strågefors <ls223aa@student.lnu.se>, Alexander Eckmaier <alexander.eckmaier@gmail.com>",
   "scripts": {
     "start": "node app.js"
    },

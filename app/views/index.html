@@ -8,18 +8,25 @@
 </head>
 
 <body>
-    <h3>Search for restaurants on Google Places:</h3>
-    Ex, 'England London McDonalds'
+    <h2>Search for restaurants on Google Places:</h2>
+    For detailed search results with Zomato, supported countries are for example:<br>Italy, Poland, Portugal, Slovakia, Turkey, United Kingdom <br>
+    <br>Search example: 'mcdonalds London'
     <br><br>
    
-    Search keywords: <input id ="inputSearch" type="text" name="search">
+    Search keywords: <input id="inputSearch" type="text" name="search">
     
-    <button onclick="searchGplaces()">Click me</button>
+    <button onclick="searchGplaces()">search</button>
 
     <div id="divTable"></div>
 
+    <br><br>
+    <div id="divZomato"></div>
+    <br>
+    <div id="divZomatoInfo"></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/../public/js/zomatoSearch.js"></script>
     <script src="/../public/js/googleSearch.js"></script>
 </body>
 

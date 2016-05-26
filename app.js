@@ -1,4 +1,4 @@
-/*  Author student: Linnea Strågefors
+/*  Author student: Linnea Strågefors, Alexander Eckmaier
  * Date: 2016-05-22
  * Course: Internet Architectures (4ME307), assignment 3
  *
