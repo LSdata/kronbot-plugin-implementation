@@ -9,17 +9,27 @@
 
 <body>
     <h2>Search for Restaurants at Your Location</h2>
+     
     <p id=pCountries><b>Supported countries:</b> Australia, Brasil, Canada, Chile, Czech Republic, India, Indonesia, Ireland, Italy, Lebanon, Malaysia, 
 		New Zealand, Philippines, Poland, Portugal, Qatar, Slovakia, South Africa, Sri Lanka, Turkey, UAE, United Kingdom, United States</p>
     <br>Search Example: 'London'
     <br><br>
-
+   
     <form action="/Restaurants/Results" method="POST">
-		Enter location: 
-		<input id="inputSearch" type="text" name="search" autocomplete="off">
+        Enter location: 
+		<input id="inputSearch" type="text" name="search" autocomplete="off" value=<%- JSON.stringify(search) %>>
 		<button type="submit" value="Search">Search</button>
 	</form>
 
+    <div id="divTable"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/../public/js/zomatoSearch.js"></script>
+    <script src="/../public/js/googleSearch.js"></script>
+    <script>
+        searchGplaces(<%- JSON.stringify(search) %>);
+    </script>
 </body>
 
 </html>

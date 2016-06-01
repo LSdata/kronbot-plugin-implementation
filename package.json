@@ -7,9 +7,10 @@
   "author": "Linnea Strågefors <ls223aa@student.lnu.se>, Alexander Eckmaier <alexander.eckmaier@gmail.com>",
   "scripts": {
     "start": "node app.js"
-   },
+  },
   "dependencies": {
     "body-parser": "^1.15.1",
+    "ejs": "^2.4.2",
     "express": "^4.13.4",
     "google-places": "0.0.2",
     "google-places-js": "^0.1.1",

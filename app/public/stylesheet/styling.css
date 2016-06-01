@@ -6,21 +6,39 @@ body{
     font-family: arial;
 }
 
+table{
+ *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0; 
+    border-radius: 8px 8px 8px 8px;
+}
+
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+    border: thin solid darkgrey;
 }
 
 th, td {
     padding: 5px;
 }
-
-td:hover{
-    cursor: pointer;
+th:first-child {
+    border-radius: 8px 0 0 0;
 }
 
-#gTable{
-    width: 900px;
+th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+th:only-child{
+    border-radius: 8px 8px 0 0;
+}
+table tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+}
+table tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+}
+
+#pCountries{
+    width:500px;
 }
 
 .rowSelect{
@@ -29,6 +47,13 @@ td:hover{
 .rowNoSelect{
     background-color: white;
 }
+.zrowSelect{
+    background-color: lightblue;
+}
+.zrowNoSelect{
+    background-color: white;
+}
+
 input{
     width: 250px;
     color: blue;

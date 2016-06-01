@@ -15,6 +15,12 @@ module.exports.index = function(req,res){
     res.sendFile(path.join(__dirname, '/../views/index.html'));
 }
 
+//search results page
+module.exports.search = function(req,res){
+    var searchWord = req.body.search;
+    res.render('search',{search: searchWord});
+}
+
 //request to Google Places API
 module.exports.gPlaces = function(req,res){
     var searchQuery = req.query.search;

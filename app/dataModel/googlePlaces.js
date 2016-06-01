@@ -7,17 +7,17 @@
  */   
 const https = require('https');
 //var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
-var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
+//var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
+var key = 'AIzaSyC3NLfEx9mW-CMBymzLAjrxJByQzzxN1mg'; 
+
+var type = 'restaurant'; //filter request to only search for restaurants
   
 module.exports = {
   httpsGet: function(searchquery, callback){
     
-    var type = 'restaurant'; //filter request to only search for restaurants
     //var searchquery = 'ramlosa wok'; //not åäö --> aao as Vaxjo
     var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?" + "key=" + key + "&query="+searchquery+ "&type="+type;
 
-    //console.log(url); //check results
-    
     https.get(url, function(response) {
       var data ='';
       
@@ -26,7 +26,8 @@ module.exports = {
       });
 
       response.on('end', function() {
-        //console.log(data);
+      //var parsed = JSON.parse(data);
+      //console.log(parsed['results'][0].formatted_address);
         return callback(data); //json format
       });
     }).on('error', function(e) {
@@ -34,10 +35,3 @@ module.exports = {
     });
   }
 };
-
-
-
-
-   
-
-   

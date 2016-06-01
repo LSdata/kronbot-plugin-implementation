@@ -14,7 +14,7 @@ module.exports = {
 
     var zpath = "/api/v2.1/search?q="+zQuery+"&lat="+lat+"&lon="+lng;
     var encoded_zpath = encodeURI(zpath); //for spaces between multiple search words
-    
+
     var options = {
       hostname: 'developers.zomato.com',
       port: 443,

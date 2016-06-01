@@ -7,15 +7,15 @@
  */
 
 //call our node service and get Google Places API results
-function searchGplaces() {
+function searchGplaces(searchWord) {
     var tablePlace = document.getElementById("divTable");
     var clientSearch = document.getElementById("inputSearch").value;
     
-    var url = "/gPlaces?search="+ clientSearch;
+    var url = "/gPlaces?search="+ searchWord;
     
     $.getJSON(url, function (data) {
         var dataLen = data.results.length;
-        
+
         //if there is an error_message
         if(dataLen==0){
             tablePlace.innerHTML = "<br><i>Sorry no search results! <br>(Error message: "+data.error_message+")</i>";
@@ -24,44 +24,35 @@ function searchGplaces() {
         else{
             tablePlace.innerHTML = "<br>Search results: <br>";
             
-            tablePlace.innerHTML += "<br><table id=gTable><tr><th>Name</th><th>Address</th></tr></table>";
+            tablePlace.innerHTML += "<br><table id=gTable><tr><th>Name</th><th>Address</th><th>Google Places Rating (1-5)</th><th>Zomato Rating (0-5)</th></tr></table>";
             var tableId = document.getElementById("gTable");
+            var totalLen;
+            
+            if(dataLen<5){
+                totalLen = dataLen;
+            }else
+                totalLen = 5;
 
-            for(var i=0; i<dataLen; i++) {
+            for(var i=0; i<totalLen; i++) {
                 var itemName = data.results[i].name;
                 var itemAddress = data.results[i].formatted_address;
+                var itemRating = data.results[i].rating;
                 var lat = data.results[i].geometry.location.lat;
                 var lng = data.results[i].geometry.location.lng;
                 
                 var row = tableId.insertRow();
-                row.setAttribute("onclick","rowClick("+i+","+dataLen+","+lat+","+lng+")");
-                row.setAttribute("id","rowId"+i);
                       
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
-                cell1.setAttribute("id","nameId"+i);
-                cell2.setAttribute("id","addrId"+i);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell4.setAttribute("id","zomId"+itemName);
                 cell1.innerHTML = itemName;
                 cell2.innerHTML = itemAddress;
-
+                cell3.innerHTML = itemRating
+                
+                searchZomato(itemName,lat,lng);
             }
         }
     });
-}
-
-//Highlighting the row that the users clicks. 
-//Only one row at the time can be selected
-//Pass also the item geolocation to narrow the results in Zomato
-function rowClick(i, totalNr, lat, lng){
-    var name = document.getElementById("nameId"+i).innerHTML;
-
-    //default init unselect all rows
-    for(var j=0; j<totalNr; j++) {
-        document.getElementById("rowId"+j).className="rowNoSelect";
-    }
-    //highlight selected row
-    document.getElementById("rowId"+i).className="rowSelect";
-    
-    //show results from Zomato of the selected table row restaurant
-    searchZomato(name,lat,lng);
 }

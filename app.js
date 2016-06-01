@@ -21,7 +21,8 @@ app.use(express.static(path.resolve(__dirname, 'app')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/', routes); 
-
+app.set('views', __dirname + '/app/views');
+app.set('view engine', 'ejs');
 
 //start app server
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){

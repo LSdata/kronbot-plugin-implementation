@@ -21,6 +21,9 @@ router.use(function (req,res,next) {
 //start with default routing to the startpage
 router.get("/", controller.index);
 
+//route to search results
+router.post("/Restaurants/Results", controller.search);
+
 //service: return search results of Google Places API restaurants
 router.get("/gPlaces", controller.gPlaces);
 
