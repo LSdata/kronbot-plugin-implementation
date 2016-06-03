@@ -9,14 +9,16 @@
 //call our node service and get Zomato results
 function searchZomato(rowText, lat, lng) {
     
-    var url = "/zomato?q="+ rowText+"&lat="+lat+"&lng="+lng;
+    // a radius of 1 km is necessary because of varying coordinate precision
+    var radius = 1000;
+    var url = "/zomato?q="+ rowText+"&lat="+lat+"&lng="+lng+"&radius="+radius;
    
     $.getJSON(url, function (data) {
         var dataLen = data.restaurants.length;
         
         //if there is an error_message
         if(dataLen==0){
-            zomatoRes.innerHTML += "<br><i>Sorry no search results! <br>(Error message: "+data.error_message+")</i>";
+            document.getElementById("zomId"+rowText).innerHTML="No rating found";
         }
         var itemRating =data.restaurants[0].restaurant.user_rating.aggregate_rating;
 

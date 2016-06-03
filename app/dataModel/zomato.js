@@ -12,7 +12,9 @@ var zKey = "ce83bfb23d10d3a35fb882c3087cd61d";
 module.exports = {
   httpsReq: function(zQuery, lat, lng, callback){
 
-    var zpath = "/api/v2.1/search?q="+zQuery+"&lat="+lat+"&lon="+lng;
+    // a radius of 1 km is necessary because of varying coordinate precision
+    var radius = 1000;
+    var zpath = "/api/v2.1/search?q="+zQuery+"&lat="+lat+"&lon="+lng+"&radius="+radius;
     var encoded_zpath = encodeURI(zpath); //for spaces between multiple search words
 
     var options = {
