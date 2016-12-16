@@ -17,7 +17,7 @@ module.exports.gPlaces = function(req,res){
         
         googlePlaces.getPlaces(placeType,function(response){
             console.log("Request to Google Places API");
-            res.send(response);
+            res.send(response);//
         });
     
 }
