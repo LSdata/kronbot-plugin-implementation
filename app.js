@@ -1,13 +1,10 @@
-/*  Author student: Linnea Strågefors, Alexander Eckmaier
- * Date: 2016-05-22
- * Course: Internet Architectures (4ME307), assignment 3
- *
+/*  
  * Description: this file starts the web server and initiates 
  * the Node.js Express.js application.
  */
 
 //import required modules
-http = require('http');
+var http = require('http');
 var path = require('path');
 var express = require('express');
 var routes = require('./app/routes/index'); //using the Express.js Router

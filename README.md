@@ -1,7 +1,4 @@
+# Kronoberg Tourist Chatbot with Facebook Messenger
 
-## Running the server
-
-The app can be launched from the Terminal with:
-
-    $ node app.js
-
+Group project in course Adaptive and Semantic Webhooks
+Linnaeus Univeristy

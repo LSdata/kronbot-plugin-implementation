@@ -1,10 +1,9 @@
 {
-  "name": "nodeservices4me307",
+  "name": "chatbot_json",
   "version": "0.0.1",
-  "description": "A mashup website of two Web Services called from node server side",
+  "description": "for JSON plugin to Chatfuel",
   "main": "app.js",
-  "repository": "",
-  "author": "Linnea Strågefors <ls223aa@student.lnu.se>, Alexander Eckmaier <alexander.eckmaier@gmail.com>",
+  "author": "Linnea Strågefors <ls223aa@student.lnu.se>",
   "scripts": {
     "start": "node app.js"
   },
@@ -12,10 +11,10 @@
     "body-parser": "^1.15.1",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
-    "google-places": "0.0.2",
-    "google-places-js": "^0.1.1",
     "http": "0.0.0",
     "https": "^1.0.0",
     "path": "^0.12.7"
-  }
+  },
+  "devDependencies": {},
+  "license": "ISC"
 }
