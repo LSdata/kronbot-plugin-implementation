@@ -21,9 +21,6 @@ module.exports = {
       });
 
       response.on('end', function() {
-      //var parsed = JSON.parse(data);
-      //console.log(parsed['results'][0].name);
-        //return callback(data) //json format
         var placeArr = generatePlaceArr(data);
         var message = createMess(placeArr);
         return callback(message);
@@ -61,7 +58,7 @@ function generatePlaceArr(data){
           }
           else
             counter=counter+1;
-          placeArr[counter] = []; //place nr.
+          placeArr[counter] = []; //place nr
           placeArr[counter] = [name, getAllTypes(type), address, getGmapsURL(photo_htmlattr), photo, lat, lng];
           console.log("COUNTER: "+counter+". i="+i);
       }else
