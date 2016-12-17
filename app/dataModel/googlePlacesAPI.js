@@ -68,8 +68,10 @@ function generatePlaceArr(data, callback){
         var typesLen = typesArr.length;
         
         for(var k=0; k<typesLen; k++){
-          type += typesArr[k];
+          type += typesArr[k]+", ";
         }
+        type = type.substring(0, type.length - 2); //remove last ', '
+
       }else
         console.log("NO TYPE");
 
