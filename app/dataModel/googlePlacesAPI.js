@@ -6,8 +6,8 @@ module.exports = {
 
   getPlaces: function(type, callback){
     //var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
-    //var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
-    var key = 'AIzaSyC3NLfEx9mW-CMBymzLAjrxJByQzzxN1mg'; 
+    var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
+    //var key = 'AIzaSyC3NLfEx9mW-CMBymzLAjrxJByQzzxN1mg'; 
     
     var searchquery = 'kronoberg'; //not åäö --> aao as Vaxjo
     //var type = 'bakery|restaurant|cafe'
@@ -49,17 +49,46 @@ function generatePlaceArr(data, callback){
 
   //get 7 google place items. Place in array.
   for(var i=0; i<len; i++){
-    try{
+      var name = parsed['results'][i].name;
+      var type = "Categories: ";
+      var address = parsed['results'][i].formatted_address;
+      var photo = "photo"; //getPlacePhoto();
+      var lat = parsed['results'][i].geometry.location.lat;
+      var lng = parsed['results'][i].geometry.location.lng;
+      var ref ="ref";
+      
+      if(parsed['results'][i].photos){
+        ref = parsed['results'][i].photos[0].photo_reference;
+      }else
+        ref="(No place category defined)"
+        console.log("NO PHOTO");
+        
+      if(parsed['results'][i].types){
+        var typesArr = parsed['results'][i].types;
+        var typesLen = typesArr.length;
+        
+        for(var k=0; k<typesLen; k++){
+          type += typesArr[k];
+        }
+      }else
+        console.log("NO TYPE");
+
+      //placeArr[counter] = [name, typesTxt, address, photo, lat, lng];
+      placeArr[i] = [name, type, address, photo, lat, lng]; 
+
+    }
+    return callback(placeArr);
+}
+    /*try{
       var name = parsed['results'][i].name;
       var type = parsed['results'][i].types;
       var address = parsed['results'][i].formatted_address;
-      var photo_htmlattr = parsed['results'][i].photos[0].html_attributions[0];
       var photo_ref = parsed['results'][i].photos[0].photo_reference;
       var photo = "photo"; //getPlacePhoto();
       var lat = parsed['results'][i].geometry.location.lat;
       var lng = parsed['results'][i].geometry.location.lng;
 
-      if( (address != 'undefined') && (photo_htmlattr!= 'undefined') && (name != 'undefined') 
+      if( (address != 'undefined') && (name != 'undefined') 
       && (photo_ref != 'undefined') && (counter < 4 ) ){
           if(flagFirst==0){
             counter=0;
@@ -69,15 +98,86 @@ function generatePlaceArr(data, callback){
             counter=counter+1;
           }
           placeArr[counter] = []; 
-          placeArr[counter] = [name, getAllTypes(type), address, getGmapsURL(photo_htmlattr), photo, lat, lng];
+          
+          //types
+          if(type.length != null){
+            var len = type.length;
+            var typesTxt = "Categories: ";
+            for(var i=0; i<len; i++){
+              typesTxt += type[i] +", ";
+            }
+            typesTxt = typesTxt.substring(0, typesTxt.length - 2); //remove last ', '
+          } else
+            typesTxt= "(This place is in an undefined category)";
+            
+          placeArr[counter] = [name, typesTxt, address, photo, lat, lng];
           console.log("COUNTER: "+counter+". i="+i);
       }else
         continue;
       } catch(err) {
         console.log("Place property is missing i="+i);
+      }*/
+ 
+
+function createMess(placeArr, callback){
+  //placeArr[counter] = [name, typesTxt, address, photo, lat, lng];
+  
+  var messageData = {
+    "messages": [
+      {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: placeArr[0][0],
+            subtitle: placeArr[0][1],
+            buttons: [{
+              type: "web_url",
+              url: "http://maps.google.com/maps?q=loc:"+placeArr[0][4] +","+placeArr[0][5],
+              title: placeArr[0][2]
+            }]
+          }, {
+           title: placeArr[1][0],
+            subtitle: placeArr[1][1],
+            buttons: [{
+              type: "web_url",
+              url: "http://maps.google.com/maps?q=loc:"+placeArr[1][4] +","+placeArr[1][5],
+              title: placeArr[1][2]
+            }]
+            }, {
+            title: placeArr[2][0],
+            subtitle: placeArr[2][1],
+            buttons: [{
+              type: "web_url",
+              url: "http://maps.google.com/maps?q=loc:"+placeArr[2][4] +","+placeArr[2][5],
+              title: placeArr[2][2]
+            }]
+            }, {
+            title: placeArr[3][0],
+            subtitle: placeArr[3][1],
+            buttons: [{
+              type: "web_url",
+              url: "http://maps.google.com/maps?q=loc:"+placeArr[3][4] +","+placeArr[3][5],
+              title: placeArr[3][2]
+            }]
+            }, {
+            title: placeArr[4][0],
+            subtitle: placeArr[4][1],
+            buttons: [{
+              type: "web_url",
+              url: "http://maps.google.com/maps?q=loc:"+placeArr[4][4] +","+placeArr[4][5],
+              title: placeArr[4][2]
+            }]
+            }
+          ]
+        }
       }
-  }
-  return callback(placeArr);
+    }
+    ]
+  };
+  return callback(messageData);
+
 }
 
 
@@ -95,69 +195,4 @@ function getAllTypes(typesArr){
     return "(This place is in an undefined category)";
 }
 
-function getGmapsURL(gmapsURL){
-    gmapsURL = gmapsURL.replace(/['"]+/g, '');
-    gmapsURL = gmapsURL.slice(8);
-    gmapsURL = gmapsURL.substring(0, gmapsURL.indexOf('>'));
-    return gmapsURL;
-}
-
-function createMess(placeArr, callback){
-  var messageData = {
-    "messages": [
-      {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [{
-            title: placeArr[0][0],
-            subtitle: placeArr[0][1],
-            buttons: [{
-              type: "web_url",
-              url: "http://maps.google.com/maps?q=loc:"+placeArr[0][5] +","+placeArr[0][6],
-              title: placeArr[0][2]
-            }]
-          }, {
-           title: placeArr[1][0],
-            subtitle: placeArr[1][1],
-            buttons: [{
-              type: "web_url",
-              url: "http://maps.google.com/maps?q=loc:"+placeArr[1][5] +","+placeArr[1][6],
-              title: placeArr[1][2]
-            }]
-            }, {
-            title: placeArr[2][0],
-            subtitle: placeArr[2][1],
-            buttons: [{
-              type: "web_url",
-              url: "http://maps.google.com/maps?q=loc:"+placeArr[2][5] +","+placeArr[2][6],
-              title: placeArr[2][2]
-            }]
-            }, {
-            title: placeArr[3][0],
-            subtitle: placeArr[3][1],
-            buttons: [{
-              type: "web_url",
-              url: "http://maps.google.com/maps?q=loc:"+placeArr[3][5] +","+placeArr[3][6],
-              title: placeArr[3][2]
-            }]
-            }, {
-            title: placeArr[4][0],
-            subtitle: placeArr[4][1],
-            buttons: [{
-              type: "web_url",
-              url: "http://maps.google.com/maps?q=loc:"+placeArr[4][5] +","+placeArr[4][6],
-              title: placeArr[4][2]
-            }]
-            }
-          ]
-        }
-      }
-    }
-    ]
-  };
-  return callback(messageData);
-
-}
 
