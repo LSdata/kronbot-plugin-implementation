@@ -24,10 +24,7 @@ module.exports = {
       response.on('end', function() {
         
        generatePlaceArr(data, function(arr) {
-          /*
-          createMess(arr, function(mess) {
-            return callback(mess)
-          });*/
+  
           //5 callbacks to get photo and add to array
           getPlacePhoto(arr[0][3], function(photo_ref0) {
               arr[0][3] = photo_ref0;
