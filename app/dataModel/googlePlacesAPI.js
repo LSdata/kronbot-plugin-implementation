@@ -64,8 +64,8 @@ function generatePlaceArr(data, callback){
         console.log("NO PHOTO");
         
       if(parsed['results'][i].types){
-        type = parsed['results'][i].types[0];
-        /*
+        //type = parsed['results'][i].types[0];
+        
         var typesArr = parsed['results'][i].types;
         var typesLen = typesArr.length;
         
@@ -73,7 +73,7 @@ function generatePlaceArr(data, callback){
           type += typesArr[k]+", ";
         }
         type = type.substring(0, type.length - 2); //remove last ', '
-        */
+        
 
       }else
         type="(No category listed for this place)"
