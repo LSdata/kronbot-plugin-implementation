@@ -25,11 +25,11 @@ module.exports = {
       //var placeArr = generatePlaceArr(data);
       //var message = createMess(placeArr);
 
-        var placeArr = generatePlaceArr(data, function(info) {
-          return callback(createMess(placeArr));
-          
+       generatePlaceArr(data, function(arr) {
+          createMess(arr, function(mess) {
+            return callback(mess)
+          });
         });
-        
         
         //return callback(message);
         
@@ -102,7 +102,7 @@ function getGmapsURL(gmapsURL){
     return gmapsURL;
 }
 
-function createMess(placeArr){
+function createMess(placeArr, callback){
   var messageData = {
     "messages": [
       {
@@ -157,7 +157,7 @@ function createMess(placeArr){
     }
     ]
   };
-  return messageData;
+  return callback(messageData);
 
 }
 
