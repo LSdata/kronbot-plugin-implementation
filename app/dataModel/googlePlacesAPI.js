@@ -7,8 +7,8 @@ module.exports = {
   getPlaces: function(type, callback){
    
     //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
-    var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
-    //var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
+    //var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
+    var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
     
     var searchquery = 'kronoberg'; //not åäö --> aao as Vaxjo
     //var type = 'bakery|restaurant|cafe' //syntax for multiple categories
@@ -164,8 +164,8 @@ function createMess(placeArr, callback){
 function getPlacePhoto(photo_ref, callback){
    
     //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
-    var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
-    //var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
+    //var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
+    var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
 
     var url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=752&photoreference="+photo_ref+"&key="+key;
 
