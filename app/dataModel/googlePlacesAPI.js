@@ -21,9 +21,18 @@ module.exports = {
       });
 
       response.on('end', function() {
-        var placeArr = generatePlaceArr(data);
-        var message = createMess(placeArr);
-        return callback(message);
+        
+      //var placeArr = generatePlaceArr(data);
+      //var message = createMess(placeArr);
+
+        var placeArr = generatePlaceArr(data, function(info) {
+          return callback(createMess(placeArr));
+          
+        });
+        
+        
+        //return callback(message);
+        
       });
     }).on('error', function(e) {
       console.log("Got error: " + e.message);
@@ -31,7 +40,7 @@ module.exports = {
   }
 };
 
-function generatePlaceArr(data){
+function generatePlaceArr(data, callback){
   var placeArr = [];
   var parsed = JSON.parse(data);
   var len = parsed['results'].length;
@@ -59,7 +68,7 @@ function generatePlaceArr(data){
           else{
             counter=counter+1;
           }
-          placeArr[counter] = []; //place nr
+          placeArr[counter] = []; 
           placeArr[counter] = [name, getAllTypes(type), address, getGmapsURL(photo_htmlattr), photo, lat, lng];
           console.log("COUNTER: "+counter+". i="+i);
       }else
@@ -68,7 +77,7 @@ function generatePlaceArr(data){
         console.log("Place property is missing i="+i);
       }
   }
-  return placeArr;
+  return callback(placeArr);
 }
 
 
