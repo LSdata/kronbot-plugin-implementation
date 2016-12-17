@@ -5,8 +5,8 @@ const https = require('https');
 module.exports = {
 
   getPlaces: function(type, callback){
-    //var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
-    var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
+    var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
+    //var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
     //var key = 'AIzaSyC3NLfEx9mW-CMBymzLAjrxJByQzzxN1mg'; 
     
     var searchquery = 'kronoberg'; //not åäö --> aao as Vaxjo
@@ -64,6 +64,8 @@ function generatePlaceArr(data, callback){
         console.log("NO PHOTO");
         
       if(parsed['results'][i].types){
+        type = parsed['results'][i].types[0];
+        /*
         var typesArr = parsed['results'][i].types;
         var typesLen = typesArr.length;
         
@@ -71,9 +73,11 @@ function generatePlaceArr(data, callback){
           type += typesArr[k]+", ";
         }
         type = type.substring(0, type.length - 2); //remove last ', '
+        */
 
       }else
-        console.log("NO TYPE");
+        type="(No category listed for this place)"
+        //console.log("NO TYPE");
 
       //placeArr[counter] = [name, typesTxt, address, photo, lat, lng];
       placeArr[i] = [name, type, address, photo, lat, lng]; 
