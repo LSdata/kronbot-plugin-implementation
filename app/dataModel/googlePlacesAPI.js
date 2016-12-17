@@ -5,10 +5,11 @@ const https = require('https');
 module.exports = {
 
   getPlaces: function(type, callback){
-    //var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
     //var key = 'AIzaSyBV6zeRCH8WJ3nou-uiwYToG3Rnlsy7oRU';
     //var key = 'AIzaSyC3NLfEx9mW-CMBymzLAjrxJByQzzxN1mg'; 
-    var key = 'AIzaSyArIJaPtk5P57N5Na6ZKym-bvRnp0IyaYg';
+    //var key = 'AIzaSyArIJaPtk5P57N5Na6ZKym-bvRnp0IyaYg';
+    var key = 'AIzaSyAloPXLxrDoF0WWPbaZykZ8BeRvLHokAWc';
+    //var key = 'AIzaSyA8PtE7o-EZgfVOoABhitN6yV10jr-UM5A'; 
     
     var searchquery = 'kronoberg'; //not åäö --> aao as Vaxjo
     //var type = 'bakery|restaurant|cafe'
