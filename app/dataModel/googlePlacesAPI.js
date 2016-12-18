@@ -28,7 +28,7 @@ module.exports = {
           //5 callbacks to get photo and add to array
           getPlacePhoto(arr[0][3], function(photo_ref0) {
               arr[0][3] = photo_ref0;
-              getPlacePhoto(arr[0][3], function(photo_ref1) {
+              getPlacePhoto(arr[1][3], function(photo_ref1) {
                 arr[1][3] = photo_ref1;
                 getPlacePhoto(arr[2][3], function(photo_ref2) {
                   arr[2][3] = photo_ref2;
