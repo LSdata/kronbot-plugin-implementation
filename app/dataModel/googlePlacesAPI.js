@@ -24,21 +24,7 @@ module.exports = {
       response.on('end', function() {
         
        generatePlaceArr(data, function(arr) {
-          getPlaceWebsite(arr[0][6], function(website) {
-            arr[0][6] = website;
-          });
-          getPlaceWebsite(arr[1][6], function(website) {
-            arr[1][6] = website;
-          });
-          getPlaceWebsite(arr[2][6], function(website) {
-            arr[2][6] = website;
-          });
-          getPlaceWebsite(arr[3][6], function(website) {
-            arr[3][6] = website;
-          });
-          getPlaceWebsite(arr[4][6], function(website) {
-            arr[4][6] = website;
-          });  
+  
           //5 callbacks to get photo and add to array
           getPlacePhoto(arr[0][3], function(photo_ref0) {
               arr[0][3] = photo_ref0;
@@ -85,9 +71,8 @@ function generatePlaceArr(data, callback){
       var ref ="ref";
       var images = parsed['results'][i].photos;
       var categTypes = parsed['results'][i].types;
-      var placeID = parsed['results'][i].place_id;
       
-      if(images && categTypes && name && address && lat && lng && counter <4 && placeID){
+      if(images && categTypes && name && address && lat && lng && counter <4){
         counter++;
         ref = parsed['results'][i].photos[0].photo_reference;
         
@@ -99,7 +84,7 @@ function generatePlaceArr(data, callback){
           type += typesArr[k]+", ";
         }
         type = type.substring(0, type.length - 2); //remove last ', '
-        placeArr[counter] = [name, type, address, ref, lat, lng, placeID];
+        placeArr[counter] = [name, type, address, ref, lat, lng];
       }
       
     }
@@ -120,7 +105,6 @@ function createMess(placeArr, callback){
             title: placeArr[0][0],
             image_url: placeArr[0][3], 
             subtitle: placeArr[0][1],
-            item_url: placeArr[0][6],
             buttons: [{
               type: "web_url",
               url: "http://maps.google.com/maps?q=loc:"+placeArr[0][4] +","+placeArr[0][5],
@@ -130,7 +114,6 @@ function createMess(placeArr, callback){
             title: placeArr[1][0],
             image_url: placeArr[1][3], 
             subtitle: placeArr[1][1],
-            item_url: placeArr[1][6],
             buttons: [{
               type: "web_url",
               url: "http://maps.google.com/maps?q=loc:"+placeArr[1][4] +","+placeArr[1][5],
@@ -140,7 +123,6 @@ function createMess(placeArr, callback){
             title: placeArr[2][0],
             image_url: placeArr[2][3], 
             subtitle: placeArr[2][1],
-            item_url: placeArr[2][6],
             buttons: [{
               type: "web_url",
               url: "http://maps.google.com/maps?q=loc:"+placeArr[2][4] +","+placeArr[2][5],
@@ -150,7 +132,6 @@ function createMess(placeArr, callback){
             title: placeArr[3][0],
             image_url: placeArr[3][3], 
             subtitle: placeArr[3][1],
-            item_url: placeArr[3][6],
             buttons: [{
               type: "web_url",
               url: "http://maps.google.com/maps?q=loc:"+placeArr[3][4] +","+placeArr[3][5],
@@ -160,7 +141,6 @@ function createMess(placeArr, callback){
             title: placeArr[4][0],
             image_url: placeArr[4][3], 
             subtitle: placeArr[4][1],
-            item_url: placeArr[4][6],
             buttons: [{
               type: "web_url",
               url: "http://maps.google.com/maps?q=loc:"+placeArr[4][4] +","+placeArr[4][5],
@@ -202,26 +182,5 @@ function getPlacePhoto(photo_ref, callback){
     });
   }
   
-  function getPlaceWebsite(placeID, callback){
-    
-    var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
-    var url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+placeID+"&key="+key;
-    
-    https.get(url, function(response) {
-      var data ='';
-      
-      response.on('data', function(d) {
-        data += d;
-      });
-
-      response.on('end', function() {
-        var parsed = JSON.parse(data);
-        var place_website = parsed['result'].website;
-
-        callback(place_website);
-      });
-    }).on('error', function(e) {
-      console.log("Got error: " + e.message);
-    });
-  }
+  
 
