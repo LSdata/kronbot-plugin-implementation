@@ -6,7 +6,7 @@ module.exports = {
 
   getPlaces: function(type, callback){
    
-    //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
+    //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';//
     //var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
     var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
     
@@ -92,7 +92,7 @@ function generatePlaceArr(data, callback){
 }
   
 function createMess(placeArr, callback){
-  //placeArr[counter] = [name, typesTxt, address, photo, lat, lng];
+  //placeArr[counter] = [name, type, address, ref, lat, lng];
   
   var messageData = {
     "messages": [
@@ -174,13 +174,7 @@ function getPlacePhoto(photo_ref, callback){
       });
 
       response.on('end', function() {
-        //image withdrawn from client, error message
-        if (data.substring(0, 4) == "<!DO") {
-          data='https://chatbot-json2-lsdata.c9users.io/public/images/noIm.png';
-        
-        //image exists
-        }else
-          data = data.substring(168, data.length - 29); //remove last ', '
+        data = data.substring(168, data.length - 29); //remove last ', '
         callback(data);
       });
     }).on('error', function(e) {
