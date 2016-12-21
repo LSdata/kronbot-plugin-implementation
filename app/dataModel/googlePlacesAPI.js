@@ -62,7 +62,6 @@ function generatePlaceArr(data, callback){
   var len = parsed['results'].length;
   var counter = -1; //init
   var flagFirst = 0;
-  //console.log(data);
 
   //get 7 google place items. Place in array.
   for(var i=0; i<len; i++){
@@ -76,14 +75,11 @@ function generatePlaceArr(data, callback){
       var images = parsed['results'][i].photos;
       var categTypes = parsed['results'][i].types;
       var placeID = parsed['results'][i].place_id;
-      console.log(images);
-      
+
       if( (typeof images !== 'undefined') && categTypes && name && address && lat && lng && counter <4 && placeID){
         counter++;
-        //console.log("IMAGES: "+ images);
         ref = parsed['results'][i].photos[0].photo_reference;
-        console.log("REF: "+ ref);
-        
+
         //get place categories
         var typesArr = parsed['results'][i].types;
         var typesLen = typesArr.length;
