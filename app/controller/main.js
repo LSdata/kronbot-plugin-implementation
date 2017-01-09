@@ -1,6 +1,7 @@
 /* 
- * Description: this file is the main controller of the web applicaation.
- * This files contains functions that can be accessed from the Express Router. 
+ * Description: this file contains the main controller of the web applicaation.
+ * The router functions that can be accessed from the Express Router. 
+ * The main controller deligates tasks furhter to server side modules.
  */
 
 var path = require('path');
@@ -11,15 +12,14 @@ module.exports.index = function(req,res){
     res.sendFile(path.join(__dirname, '/../views/index.html'));
 }
 
-//search results page
+//get place information from Google Places API Web Services
 module.exports.gPlaces = function(req,res){
-        var placeType = req.query.type;
-        
-        googlePlaces.getPlaces(placeType,function(response){
-            console.log("Request to Google Places API");
-            res.send(response);
-        });
+    var placeType = req.query.type;
     
+    googlePlaces.getPlaces(placeType,function(response){
+        console.log("Request to Google Places API");
+        res.send(response);
+    });
 }
 
 

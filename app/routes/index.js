@@ -15,11 +15,10 @@ router.use(function (req,res,next) {
   next();
 });
 
-//start with default routing to the startpage
+//default routing to the startpage
 router.get("/", controller.index);
 
 //for example https://chatbot-json-lsdata.c9users.io/googlePlacesAPI?type=restaurant
 router.get("/googlePlacesAPI", controller.gPlaces);
-
 
 module.exports = router;

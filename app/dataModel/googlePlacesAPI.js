@@ -1,12 +1,23 @@
 var path = require('path');
 const https = require('https');
 
-// Geocode an address.
+/*
+ * This server side module retrieves place information from Google Places Web Service API.
+ * General information is retrieved from the sub-API Google Places Textsearch API.
+ * The sub-API Place Details is used to retrieve the place website address. 
+ * The sub-API Place Photo Service is used to retrieve a place photo.
+ * 
+ * https://developers.google.com/places/web-service/
+ */
+
 module.exports = {
 
+  /* get information about google places by a specific textsearch and place type 
+   * Return array with place information.
+   */
   getPlaces: function(type, callback){
    
-    //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';//
+    //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
     //var key = 'AIzaSyBn60XRXSKKUI-LRtkgTOhqY7vXN5UkDeA';
     var key = 'AIzaSyCFqKvQaHJPzOw87j-doG1QcwGH3HHgRLs';
     
@@ -56,6 +67,7 @@ module.exports = {
   }
 };
 
+//create array with information from Google Places Textsearch
 function generatePlaceArr(data, callback){
   var placeArr = [];
   var parsed = JSON.parse(data);
@@ -63,7 +75,7 @@ function generatePlaceArr(data, callback){
   var counter = -1; //init
   var flagFirst = 0;
 
-  //get 7 google place items. Place in array.
+  //get 5 google place items. Place in array.
   for(var i=0; i<len; i++){
       var name = parsed['results'][i].name;
       var type="Categories: "
@@ -95,7 +107,8 @@ function generatePlaceArr(data, callback){
     }
     return callback(placeArr);
 }
-  
+
+//create the response message in JSON that is returned back to the Chatfuel JSON API HTTP GET request
 function createMess(placeArr, callback){
   //placeArr[counter] = [name, type, address, ref, lat, lng];
   
@@ -144,10 +157,9 @@ function createMess(placeArr, callback){
     ]
   };
   return callback(messageData);
-
 }
 
-
+//get place photo url address
 function getPlacePhoto(photo_ref, callback){
    
     //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
@@ -171,7 +183,8 @@ function getPlacePhoto(photo_ref, callback){
       console.log("Got error: " + e.message);
     });
   }
-  
+
+//get place website address
 function getPlaceWebsite(placeID, callback){
     
     //var key = 'AIzaSyBjEUp9wJIW-7y8YmU_iTX5nzC652atjgc';
@@ -196,4 +209,3 @@ function getPlaceWebsite(placeID, callback){
       console.log("Got error: " + e.message);
     });
   }
-

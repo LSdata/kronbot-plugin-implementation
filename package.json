@@ -1,7 +1,7 @@
 {
   "name": "chatbot_json",
   "version": "0.0.1",
-  "description": "for JSON plugin to Chatfuel",
+  "description": "used in the JSON API plugin in Chatfuel",
   "main": "app.js",
   "author": "Linnea Strågefors <ls223aa@student.lnu.se>",
   "scripts": {
